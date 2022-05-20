@@ -89,7 +89,7 @@ jQuery(document).ready(function($){
         var downloads = $('#downloads').val();
 
 
-        var adp =   $('#adp').prop('checked');
+        var adp  = $('#adp').prop('checked'); /* add movies */ 
         var ade1 = $('#ade1').prop('checked');
         var ade2 = $('#ade2').prop('checked');
         var ade3 = $('#ade3').prop('checked');

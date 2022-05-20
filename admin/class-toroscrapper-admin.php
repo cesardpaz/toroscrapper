@@ -33,8 +33,8 @@ class TOROSCRAPPER_Admin {
 
     public function add_menu() {
         $this->build_menupage->add_menu_page(
-            __( 'Demo Torothemes', 'toroscrapper' ),
-            __( 'Demo Torothemes', 'toroscrapper' ),
+            __( 'ToroScrapper', 'toroscrapper' ),
+            __( 'ToroScrapper', 'toroscrapper' ),
             'manage_options',
             'demo_torothemes',
             [ $this, 'demo_torothemes' ]

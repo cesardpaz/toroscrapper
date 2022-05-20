@@ -310,10 +310,12 @@ class TOROSCRAPPER_Ajax_Admin {
         }
     }
 
+
+    /* PLAYERS */
     public function add_scrapper() {
         if( isset( $_POST[ 'action' ] ) ) {
 
-            $adp = $_POST['adp'];
+            $adp  = $_POST['adp'];
             $ade1 = $_POST['ade1'];
             $ade2 = $_POST['ade2'];
             $ade3 = $_POST['ade3'];
@@ -329,10 +331,12 @@ class TOROSCRAPPER_Ajax_Admin {
             $downds = explode("\n", str_replace("\r", "", $downloads));
             $link = array();
             foreach($plays as $t => $pl) {
-                $link[] = array('url' => $pl, 'type' => 1);
+                if($pl != '')
+                    $link[] = array('url' => $pl, 'type' => 1);
             }
             foreach($downds as $t => $pl) {
-                $link[] = array('url' => $pl, 'type' => 2);
+                if($pl != '')
+                    $link[] = array('url' => $pl, 'type' => 2);
             }
             $count_total = count($plays) + count($downds);
             //servers
@@ -364,16 +368,13 @@ class TOROSCRAPPER_Ajax_Admin {
 				);
 				$sert3 = $ser3['term_id'];
 			} else {
-				$ser3 = get_term_by('name', 'vimeo', 'server');
+				$ser3  = get_term_by('name', 'vimeo', 'server');
 				$sert3 = $ser3->term_id;
 			}
 			$servers = array($sert1, $sert2, $sert3);
           
             if($adp == "true"){
-
-               
-
-                /* MOVIES */
+                /* movies */
                 $args = array(
                     'post_type'           => 'movies',
                     'posts_per_page'      => 100,
@@ -382,30 +383,30 @@ class TOROSCRAPPER_Ajax_Admin {
                 $the_query = new WP_Query( $args );
                 if ( $the_query->have_posts() ) :
                     while ( $the_query->have_posts() ) : $the_query->the_post();
-                        $post_id = get_the_ID();
-                        $trailer = get_post_meta( $post_id, 'field_trailer', true );
+                        $post_id     = get_the_ID();
+                        $trailer     = htmlspecialchars_decode(get_post_meta( $post_id, 'field_trailer', true ));
                         $links_total = count($plays);
-                        if($trailer) {
+                        if($trailer) 
+                        {
                             $ab = array('url' => $trailer, 'type' => 1);
-
                             $kl = $link;
                             array_unshift($kl, $ab);
                         }
-                        foreach ($kl as $index => $pl) {
-                                $array_links[$index] = array(
-                                    'type'    => $pl['type'],
-                                    'server'  => $servers[array_rand($servers, 1)],
-                                    'lang'    => $langs[array_rand($langs, 1)],
-                                    'quality' => $quals[array_rand($quals, 1)],
-                                    'link'    => base64_encode ( stripslashes( esc_textarea( $pl['url'] ) ) ),
-                                    'date'    => date('d').'/'.date('m').'/'.date('Y'),
-                                );  
-                                update_post_meta( $post_id, 'trglinks_'.$index, serialize( $array_links[$index] ) );
+                        foreach ($kl as $index => $pl)
+                        {
+                            $array_links[$index] = array(
+                                'type'    => $pl['type'],
+                                'server'  => $servers[ array_rand($servers, 1) ],
+                                'lang'    => $langs[ array_rand($langs, 1) ],
+                                'quality' => $quals[ array_rand($quals, 1) ],
+                                'link'    => base64_encode ( stripslashes( esc_textarea( $pl['url'] ) ) ),
+                                'date'    => date('d').'/'.date('m').'/'.date('Y'),
+                            );
+                            update_post_meta( $post_id, 'trglinks_'.$index, serialize( $array_links[$index] ) );
                         }
                         update_post_meta( $post_id, 'trgrabber_tlinks', count($kl) );
-                endwhile;
-                endif; wp_reset_query(); 
-
+                    endwhile;
+                endif; wp_reset_query();
             }
 
             if($ade1 == "true" or $ade2 ="true" or $ade3 ="true" or $ade4 ="true" ){

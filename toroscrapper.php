@@ -20,7 +20,7 @@ global $wpdb;
 define( 'TOROSCRAPPER_REALPATH_BASENAME_PLUGIN', dirname( plugin_basename( __FILE__ ) ) . '/' );
 define( 'TOROSCRAPPER_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TOROSCRAPPER_DIR_URI', plugin_dir_url( __FILE__ ) );
-define( 'TOROSCRAPPER_VERSION', '1.2.8' );
+define( 'TOROSCRAPPER_VERSION', '1.0.0' );
 
 require_once TOROSCRAPPER_DIR_PATH . 'includes/class-toroscrapper-master.php';
 
