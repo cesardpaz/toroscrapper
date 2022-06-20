@@ -1,0 +1,24 @@
+{
+  "name": "toroscrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tw-dev": "npx tailwindcss -i ./src/css/tailwind.css -o ./admin/css/toroscrapper_admin.css --watch",
+    "tw-prod": "npx tailwindcss -i ./src/css/tailwind.css -o ./admin/css/toroscrapper_admin.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cesardpaz/toroscrapper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cesardpaz/toroscrapper/issues"
+  },
+  "homepage": "https://github.com/cesardpaz/toroscrapper#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.1.3"
+  }
+}

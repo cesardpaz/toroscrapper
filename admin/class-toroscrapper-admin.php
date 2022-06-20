@@ -13,14 +13,12 @@ class TOROSCRAPPER_Admin {
     public function enqueue_styles( $hook ) {
         if(isset($_GET['page'])){
             if( $hook == 'toplevel_page_demo_torothemes' or $_GET['page'] == 'demo_comment' or $_GET['page'] == 'demo_add_movies' or $_GET['page'] == 'demo_add_series' or $_GET['page'] == 'demo_add_seasons' ) {
-                wp_enqueue_style( 'materialize_admin_css', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css', array(), $this->version, 'all' );
-                wp_enqueue_style( 'materialize_icon', 'https://fonts.googleapis.com/icon?family=Material+Icons', array(), $this->version, 'all' );
+                wp_enqueue_style( 'toroscrapper_admin_css', TOROSCRAPPER_DIR_URI . 'admin/css/toroscrapper_admin.css', array(), filemtime(TOROSCRAPPER_DIR_PATH . 'admin/css/toroscrapper_admin.css'), 'all' );
             }
         }   
     }
     public function enqueue_scripts( $hook ) {
         wp_enqueue_script( 'materialize_admin_js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js', [ 'jquery' ], $this->version, true );
-
         wp_enqueue_script( 'function_admin_js', TOROSCRAPPER_DIR_URI . 'admin/js/toroscrapper_admin.js', [ 'jquery' ], $this->version, true );
 
         $toroscrapper_Admin = [
